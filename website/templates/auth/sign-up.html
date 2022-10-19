@@ -1,0 +1,36 @@
+{% extends "auth/base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block form_title %}Sign Up{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <div class="mb-4 row">
+        <div class="col">
+            <label for="f_name" class="form-label">First name</label>
+            <input type="text" class="form-control" name="f_name" id="f_name" placeholder="First name">
+        </div>
+        <div class="col">
+            <label for="l_name" class="form-label">Last name</label>
+            <input type="text" class="form-control" name="l_name" id="l_name" placeholder="Last name">
+        </div>
+    </div>
+    <div class="mb-4 row">
+        <div class="col">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+        </div>
+    </div>
+    <div class="mb-4 row">
+        <div class="col">
+            <label for="password1" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password1" id="password1" placeholder="Password">
+        </div>
+        <div class="col">
+            <label for="password2" class="form-label">Confirm password</label>
+            <input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm password">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <p class="mt-3">Already have an account? Log in <a href="{{ url_for('auth.login') }}">here</a>.</p>
+</form>
+{% endblock %}

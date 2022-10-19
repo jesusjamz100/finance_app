@@ -1,0 +1,168 @@
+{% extends 'views/base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+    <div class="row mx-3 my-4 g-2">
+        <div class="col-lg-6 col-xl-3 px-3">
+            <div class="container-fluid dash-item card border border-0 shadow-sm">
+                <div class="row justify-content-center align-items-center g-2 ps-3">
+                    <div class="col-9 pt-4 pb-2">
+                        <div class="col-12">
+                            <p class="h3 fw-semibold">$ {{ total_balance }}</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-muted">Total balance</p>
+                        </div>
+                    </div>
+                    <div class="col-3"><i class="bi bi-bar-chart h4 ms-auto"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-3 px-3">
+            <div class="container-fluid dash-item card border border-0 shadow-sm">
+                <div class="row justify-content-center align-items-center g-2 ps-3">
+                    <div class="col-9 pt-4 pb-2">
+                        <div class="col-12">
+                            <p class="h3 fw-semibold">${{ month_balance }}</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-muted">Balance this month</p>
+                        </div>
+                    </div>
+                    <div class="col-3"><i class="bi bi-plus-slash-minus h4"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-3 px-3">
+            <div class="container-fluid dash-item card border border-0 shadow-sm">
+                <div class="row justify-content-center align-items-center g-2 ps-3">
+                    <div class="col-9 pt-4 pb-2">
+                        <div class="col-12">
+                            <p class="h3 fw-semibold text-success">$ {{ total_income_transactions }}</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-muted">Income</p>
+                        </div>
+                    </div>
+                    <div class="col-3"><i class="bi bi-graph-up-arrow h4 text-success"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-3 px-3">
+            <div class="container-fluid dash-item card border border-0 shadow-sm">
+                <div class="row justify-content-center align-items-center g-2 ps-3">
+                    <div class="col-9 pt-4 pb-2">
+                        <div class="col-12">
+                            <p class="h3 fw-semibold text-danger">$ {{ total_expense_transactions }}</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-muted">Expenses</p>
+                        </div>
+                    </div>
+                    <div class="col-3"><i class="bi bi-graph-down-arrow h4 text-danger"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-3 my-4 g-2">
+        <div class="col-lg-8 px-3">
+            <div class="container-fluid dash-item card border border-0 shadow-sm">
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col-11 pt-4 pb-2">
+                        <canvas id="chart_monthly_balance"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 px-3">
+            <div class="container-fluid dash-item card border border-0 shadow-sm">
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col-11 pt-4 pb-4">
+                        <canvas id="chart_in_ex_pie"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-3 my-4 g-2">
+        <div class="col-lg-6 px-3">
+            <div class="container-fluid dash-item card border border-0 shadow-sm">
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col-11 pt-4 pb-2">
+                        <table class="table table-hover align-middle align-center">
+                            <thead>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Balance</th>
+                            </thead>
+                            <tbody>
+                                {% for account in top_accounts %}
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td><a class="text-decoration-none text-dark" href="{{ url_for('views.account', id=account.id) }}">{{ account.name }}</a></td>
+                                        <td>${{ account.balance }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 px-3">
+            <div class="container-fluid dash-item card border border-0 shadow-sm">
+                <div class="row justify-content-center align-items-center g-2 ps-3">
+                    <div class="col-9 pt-4 pb-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 px-3">
+            <div class="container-fluid dash-item card border border-0 shadow-sm">
+                <div class="row justify-content-center align-items-center g-2 ps-3">
+                    <div class="col-9 pt-4 pb-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('chart_in_ex_pie');
+        const chart_in_ex_pie = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Income', 'Expenses'],
+                datasets: [{
+                    label: 'Income vs Expenses',
+                    data: ['{{ total_income_transactions }}', '{{ total_expense_transactions }}'],
+                    backgroundColor: [
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 99, 132)'
+                    ],
+                    hoverOffset: 4
+                }]
+            }
+        });
+    </script>
+    <script>
+        const ctx2 = document.getElementById('chart_monthly_balance');
+        const chart_monthly_balance = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December'],
+                datasets: [{
+                    label: 'Balance',
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAscpectRatio: true,
+                autoPadding: false
+            }
+        });
+    </script>
+{% endblock %}

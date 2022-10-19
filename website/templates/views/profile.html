@@ -1,0 +1,29 @@
+{% extends 'views/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="mx-5 my-5" style="background-color: white;">
+    <div class="container py-5 px-5">
+        <div class="row mx-3 my-4 g-2">
+            <div class="col">
+                <h3 class="fw-semibold">Name</h3>
+                <p class="h4">{{ user.f_name }}</p>
+            </div>
+            <div class="col">
+                <h3 class="fw-semibold">Last name</h3>
+                <p class="h4">{{ user.l_name }}</p>
+            </div>
+        </div>
+        <div class="row mx-3 my-4 g-2">
+            <div class="col">
+                <h3 class="fw-semibold">Email</h3>
+                <p class="h4">{{ user.email }}</p>
+            </div>
+        </div>
+        <div class="mx-3 my-4">
+            <a href=""><button class="btn btn-primary">Edit information</button></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

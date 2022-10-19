@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" class="auth-page">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'login_error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                        </button>
+                    </div>
+                {% elif category == 'login_success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="d-flex h-100 justify-content-center align-items-center">
+        <div class="card rounded-5 shadow">
+            <div class="py-4 px-5 justify-content-center">
+                <!-- <img class="rounded mx-auto d-block" src="{{ url_for('static', filename='logo-uah.png') }}" alt="logo-uah" width="66" height="60"> -->
+                <h3 align="center" class="mb-4 mt-2">{% block form_title %}{% endblock %}</h3>
+                {% block content %}{% endblock %}
+            </div> 
+        </div>
+    </div>
+
+    <!-- bootstrap scripts -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.css') }}"></script>
+</body>
+</html>

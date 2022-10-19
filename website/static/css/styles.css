@@ -1,0 +1,66 @@
+:root{
+    --primary: #404e67;
+}
+
+html.auth-page, .auth-page body {
+    height: 100%!important;
+}
+
+body.user-page{
+    overflow: hidden;
+    font-family: 'Muli' sans-serif;
+    font-weight: 300;
+    color: var(--primary);
+}
+
+.bg-sidebar{
+    background-color: var(--primary)!important;
+}
+
+#sidebar-container{
+    min-height: 100vh;
+}
+
+#sidebar-container .logo{
+    padding: .875rem 1.25rem;
+}
+
+#sidebar-container .menu{
+    width: 18rem;
+}
+
+#sidebar-container .menu .menu-item:hover{
+    position: relative;
+    color: white!important;
+    font-weight: 600;
+    background-color: rgb(212, 88, 88);
+}
+
+#sidebar-container .menu .menu-item{
+    position: relative;
+    color: white!important;
+}
+
+#sidebar-container .menu .active::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-left: 6px solid rgb(212, 88, 88);
+    color: rgb(212, 88, 88);
+}
+
+.btn-search{
+    right: 0;
+}
+
+#content{
+    overflow-y: auto;
+    height: 100vh;
+    padding-bottom: 5rem;
+}
+
+.dash-item{
+    background-color: white;
+}

@@ -1,0 +1,58 @@
+{% extends 'views/base.html' %}
+
+{% block title %}Transactions{% endblock %}
+
+{% block content %}
+<div class="mx-5 my-5" style="background-color: white;">
+    <div class="container py-5 px-5">
+        <div class="row mx-3 my-4 g-2 ustify-content-center">
+            <div class="col mx-auto">
+                {% if transactions %}
+                <div class="row ms-3 w-100 justify-content-end align-items-end">
+                    <div class="col ms-auto align-self-end">
+                        <a href="{{ url_for('views.add_transaction') }}"><button class="btn btn-primary">New Transaction</button></a>
+                    </div>
+                </div>
+                <br>
+                <table class="table align-middle align-center">
+                    <caption>List of transactions</caption>
+                    <thead>
+                        <th scope="col">Category</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Value</th>
+                        <th scope="col">Account</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Actions</th>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions %}
+                            <tr>
+                                <td>{{ transaction.category.name }}</td>
+                                <td>{{ transaction.transaction_type }}</td>
+                                <td>${{ transaction.value }}</td>
+                                <td>{{ transaction.account.name }}</td>
+                                <td>{{ transaction.date }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                <li><a class="dropdown-item" href="#">Add transaction</a></li>
+                                                <li><a class="dropdown-item" href="{{ url_for('views.delete_transaction', id=transaction.id) }}">Delete</a></li>
+                                            </ul>
+                                      </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>You don't have any transaction, <a href="{{ url_for('views.add_transaction') }}">click here</a> to add</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

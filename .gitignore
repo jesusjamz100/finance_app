@@ -1,0 +1,9 @@
+*.pyc
+*.sqlite
+.DS_Store
+.coverage
+myvenv
+.vscode
+instance
+__pycache__
+env.sh

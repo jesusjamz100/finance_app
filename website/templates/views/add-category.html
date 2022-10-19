@@ -1,0 +1,30 @@
+{% extends "views/base.html" %}
+{% block title %}Add categoryccount{% endblock %}
+
+{% block content %}
+<div class="mx-5 my-5" style="background-color: white;">
+    <div class="container py-5 px-5">
+        <div class="row mx-3 my-4 g-2">
+            <div class="col">
+                <form method="POST">
+                    <div class="mb-4 row">
+                        <div class="col">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                        </div>
+                        <div class="col">
+                            <label for="transaction" class="form-label">Transaction</label>
+                            <select name="transaction" id="transaction" class="form-control">
+                                <option value="in">Income</option>
+                                <option value="ex">Expense</option>
+                                <option value="tr">Transfer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

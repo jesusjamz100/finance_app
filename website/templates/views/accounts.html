@@ -1,0 +1,52 @@
+{% extends 'views/base.html' %}
+
+{% block title %}Accounts{% endblock %}
+
+{% block content %}
+<div class="mx-5 my-5" style="background-color: white;">
+    <div class="container py-5 px-5">
+        <div class="row mx-3 my-4 g-2 ustify-content-center">
+            <div class="col mx-auto">
+                {% if accounts %}
+                <div class="row ms-3 w-100 justify-content-end align-items-end">
+                    <div class="col ms-auto align-self-end">
+                        <a href="{{ url_for('views.add_account') }}"><button class="btn btn-primary">New Account</button></a>
+                    </div>
+                </div>
+                <br>
+                <table class="table align-middle align-center">
+                    <caption>List of accounts</caption>
+                    <thead>
+                        <th scope="col">Name</th>
+                        <th scope="col">Balance</th>
+                        <th scope="col">Actions</th>
+                    </thead>
+                    <tbody>
+                        {% for account in accounts %}
+                            <tr>
+                                <td><a class="text-decoration-none text-dark" href="{{ url_for('views.account', id=account.id) }}">{{ account.name }}</a></td>
+                                <td>${{ account.balance }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                <li><a class="dropdown-item" href="#">Add transaction</a></li>
+                                                <li><a class="dropdown-item" href="{{ url_for('views.delete_account', id=account.id) }}">Delete</a></li>
+                                            </ul>
+                                      </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <p>You don't have any account, <a href="{{ url_for('views.add_account') }}">click here</a> to add</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

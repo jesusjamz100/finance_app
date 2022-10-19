@@ -1,0 +1,32 @@
+{% extends "views/base.html" %}
+{% block title %}Add account{% endblock %}
+
+{% block content %}
+<div class="mx-5 my-5" style="background-color: white;">
+    <div class="container py-5 px-5">
+        <div class="row mx-3 my-4 g-2">
+            <div class="col">
+                <form method="POST">
+                    <div class="mb-4 row">
+                        <div class="col">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                        </div>
+                        <div class="col">
+                            <label for="balance" class="form-label">Balance (USD)</label>
+                            <input type="number" step="0.01" class="form-control" name="balance" id="balance" placeholder="Balance">
+                        </div>
+                    </div>
+                    <div class="mb-4 row">
+                        <div class="col">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" class="form-control" name="description" id="description" placeholder="Description">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

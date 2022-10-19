@@ -1,0 +1,25 @@
+{% extends 'views/base.html' %}
+{% block title %}Account: {{ account.name }}{% endblock %}
+
+{% block content %}
+<div class="mx-5 my-5" style="background-color: white;">
+    <div class="container py-5 px-5">
+        <div class="row mx-3 my-4 g-2">
+            <div class="col">
+                <h3 class="fw-semibold">Name</h3>
+                <p class="h4">{{ account.name }}</p>
+            </div>
+            <div class="col">
+                <h3 class="fw-semibold">Balance</h3>
+                <p class="h4">${{ account.balance }}</p>
+            </div>
+        </div>
+        <div class="row mx-3 my-4 g-2">
+            <div class="col">
+                <h3 class="fw-semibold">Description</h3>
+                <p class="h4">{{ account.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

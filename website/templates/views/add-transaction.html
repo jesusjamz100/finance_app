@@ -13,9 +13,6 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="pills-expense-tab" data-bs-toggle="pill" data-bs-target="#pills-expense" type="button" role="tab" aria-controls="pills-expense" aria-selected="false">Expense</button>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="pills-transfer-tab" data-bs-toggle="pill" data-bs-target="#pills-transfer" type="button" role="tab" aria-controls="pills-transfer" aria-selected="false">Transfer</button>
-                    </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-income" role="tabpanel" aria-labelledby="pills-income-tab" tabindex="0">
@@ -34,6 +31,10 @@
                                             <option value="{{ category.id }}">{{ category.name }}</option>
                                         {% endfor %}
                                     </select>
+                                </div>
+                                <div class="col">
+                                    <label for="datetime" class="form-label">Date and time</label>
+                                    <input type="datetime-local" name="datetime" id="datetime" class="form-control">
                                 </div>
                             </div>
                             <div class="mb-4 row">
@@ -70,6 +71,10 @@
                                         {% endfor %}
                                     </select>
                                 </div>
+                                <div class="col">
+                                    <label for="datetime" class="form-label">Date and time</label>
+                                    <input type="datetime-local" name="datetime" id="datetime" class="form-control">
+                                </div>
                             </div>
                             <div class="mb-4 row">
                                 <div class="col">
@@ -83,55 +88,6 @@
                                 <div class="col">
                                     <label for="value" class="form-label">Value (USD)</label>
                                     <input class="form-control" type="number" name="value" step="0.01" id="value">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                    <div class="tab-pane fade" id="pills-transfer" role="tabpanel" aria-labelledby="pills-transfer-tab" tabindex="0">
-                        <form method="POST">
-                            <div class="mb-4 row">
-                                <div class="col">
-                                    <label for="transaction_type" class="form-label">Transaction type</label>
-                                    <select name="transaction_type" id="transaction_type" class="form-control">
-                                        <option value="tr">Transfer</option>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <label for="category" class="form-label">Category</label>
-                                    <select name="category" id="category" class="form-control">
-                                        {% for category in transfer_categories %}
-                                            <option value="{{ category.id }}">{{ category.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mb-4 row">
-                                <div class="col">
-                                    <label for="account" class="form-label">From</label>
-                                    <select name="account" id="account" class="form-control">
-                                        {% for account in accounts %}
-                                            <option value="{{ account.id }}">{{ account.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <label for="to_account" class="form-label">To</label>
-                                    <select name="to_account" id="to_account" class="form-control">
-                                        {% for account in accounts %}
-                                            <option value="{{ account.id }}">{{ account.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="mb-4 row">
-                                <div class="col">
-                                    <label for="value" class="form-label">Value (USD)</label>
-                                    <input class="form-control" type="number" name="value" step="0.01" id="value">
-                                </div>
-                                <div class="col">
-                                    <label for="fee" class="form-label">Fee</label>
-                                    <input class="form-control" type="number" name="fee" step="0.01" id="fee" value="0">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>

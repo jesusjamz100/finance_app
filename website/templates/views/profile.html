@@ -20,6 +20,10 @@
                 <h3 class="fw-semibold">Email</h3>
                 <p class="h4">{{ user.email }}</p>
             </div>
+            <div class="col">
+                <h3 class="fw-semibold">Email</h3>
+                <p class="h4">{{ user.confirmed_on.tzinfo }}</p>
+            </div>
         </div>
         <div class="mx-3 my-4">
             <a href=""><button class="btn btn-primary">Edit information</button></a>

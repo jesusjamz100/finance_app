@@ -21,7 +21,7 @@
                         <th scope="col">Type</th>
                         <th scope="col">Value</th>
                         <th scope="col">Account</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">Date and time</th>
                         <th scope="col">Actions</th>
                     </thead>
                     <tbody>
@@ -39,10 +39,9 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item" href="#">Add transaction</a></li>
                                                 <li><a class="dropdown-item" href="{{ url_for('views.delete_transaction', id=transaction.id) }}">Delete</a></li>
                                             </ul>
-                                      </div>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}

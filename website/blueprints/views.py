@@ -118,8 +118,6 @@ def add_transaction():
         user_id=current_user.id, transaction='in').all()
     expense_categories = Category.query.filter_by(
         user_id=current_user.id, transaction='ex').all()
-    transfer_categories = Category.query.filter_by(
-        user_id=current_user.id, transaction='tr').all()
     accounts = Account.query.filter_by(user_id=current_user.id).all()
 
     if request.method == 'POST':
@@ -127,36 +125,27 @@ def add_transaction():
         category = request.form.get('category')
         account = request.form.get('account')
         value = request.form.get('value')
+        date = request.form.get('datetime')
+        date = datetime.strptime(date, "%Y-%m-%dT%H:%M")
 
         account_filter = Account.query.filter_by(id=int(account)).first()
         category_filter = Category.query.filter_by(id=int(category)).first()
 
         new_transaction = Transaction(category_id=category_filter.id, user_id=current_user.id,
-                                      account_id=account_filter.id, transaction_type=transaction_type, value=value)
+                                      account_id=account_filter.id, transaction_type=transaction_type, value=value, date=date)
 
         if transaction_type == 'in':
             account_filter.balance += int(value)
             db.session.add(new_transaction)
             db.session.commit()
             return redirect(url_for('views.transactions'))
-        elif transaction_type == 'ex':
+        else:
             account_filter.balance -= int(value)
             db.session.add(new_transaction)
             db.session.commit()
             return redirect(url_for('views.transactions'))
-        else:
-            from_account = account_filter
-            to_account = request.form.get('to_account')
-            fee = request.form.get('fee')
-            to_account_filter = Account.query.filter_by(
-                id=int(to_account)).first()
-            from_account.balance -= int(int(value)+int(fee))
-            to_account_filter.balance += int(value)
-            db.session.add(new_transaction)
-            db.session.commit()
-            return redirect(url_for('views.transactions'))
 
-    return render_template('views/add-transaction.html', user=current_user, income_categories=income_categories, expense_categories=expense_categories, transfer_categories=transfer_categories, accounts=accounts)
+    return render_template('views/add-transaction.html', user=current_user, income_categories=income_categories, expense_categories=expense_categories, accounts=accounts)
 
 
 @views.route('/delete/transaction/<int:id>')

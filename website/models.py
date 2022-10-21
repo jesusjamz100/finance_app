@@ -8,8 +8,7 @@ class Category(db.Model):
 
     TRANSACTIONS = [
         ('in', 'Income'),
-        ('ex', 'Expense'),
-        ('tr', 'Transfer')
+        ('ex', 'Expense')
     ]
 
     id = db.Column(db.Integer, primary_key=True)
@@ -23,8 +22,7 @@ class Transaction(db.Model):
 
     TYPES = [
         ('in', 'Income'),
-        ('ex', 'Expense'),
-        ('tr', 'Transfer')
+        ('ex', 'Expense')
     ]
 
     id = db.Column(db.Integer, primary_key=True)

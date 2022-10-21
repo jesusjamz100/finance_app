@@ -26,7 +26,7 @@ virtualenv venv
 ```
 #### Install requirements and set enviroment variables
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 $Env:APP_MAIL_USERNAME = "your email"
 $Env:APP_MAIL_PASSWORD = "your password"
 ```
